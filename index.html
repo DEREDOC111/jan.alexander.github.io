@@ -3,16 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name | Artist & Game Dev</title>
+    <title>Jan Alexander | Artist & Game Dev</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://github.com/DEREDOC111/jan.alexander.github.io/blob/main/favicon.png?raw=true">
 </head>
 <body>
 
+    <div class="bg-blur"></div>
+
     <header>
         <nav>
-            <div class="logo">PORTFOLIO.</div>
-            <ul>
+            <div class="logo">
+                <img src="https://github.com/DEREDOC111/jan.alexander.github.io/blob/main/Logo.png?raw=true" alt="Logo">
+            </div>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul id="nav-links">
                 <li><a href="#work">Work</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -21,31 +33,50 @@
     </header>
 
     <section class="hero">
-        <h1>Hi, I'm <span class="highlight">[Your Name]</span>.</h1>
+        <h1>Hi, I'm <span class="highlight">Jan Alexander</span>.</h1>
         <p>I build interactive worlds and the art that lives within them.</p>
         <div class="hero-tags">
-            <span>Artist</span> • <span>Game Developer</span> • <span>Technical Designer</span>
+            <span>Artist</span> • <span>Game Developer</span> • <span>Game Environment Compositor</span>
         </div>
     </section>
 
     <section id="work" class="portfolio-grid">
         <div class="project-card">
-            <div class="project-image" style="background-image: url('project1.jpg');"></div>
+            <div class="project-image" style="background-image: url('https://github.com/DEREDOC111/jan.alexander.github.io/blob/main/EOTH-THUMBNAIL.png?raw=true');"></div>
             <div class="project-info">
-                <h3>Neon Drift</h3>
+                <h3>Echoes of the Hollow</h3>
+                <p>Unity / C# / Photoshop</p>
+                <a href="#" class="btn">View Project</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image" style="background-image: url('https://github.com/DEREDOC111/jan.alexander.github.io/blob/main/Art1.webp?raw=true');"></div>
+            <div class="project-info">
+                <h3>Artworks</h3>
+                <p>Digital Illustration</p>
+                <a href="#" class="btn gallery-trigger">View Gallery</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image" style="background-image: url('https://github.com/DEREDOC111/jan.alexander.github.io/blob/main/ILLUCIDO-THUMBNAIL.png?raw=true');"></div>
+            <div class="project-info">
+                <h3>Illucido</h3>
                 <p>Unity / C# / Blender</p>
                 <a href="#" class="btn">View Project</a>
             </div>
         </div>
+
         <div class="project-card">
-            <div class="project-image" style="background-image: url('project2.jpg');"></div>
+            <div class="project-image" style="background-image: url('https://github.com/DEREDOC111/jan.alexander.github.io/blob/main/LON.jpg?raw=true');"></div>
             <div class="project-info">
-                <h3>Spectral Sketches</h3>
-                <p>Digital Illustration</p>
-                <a href="#" class="btn">View Gallery</a>
+                <h3>Project D</h3>
+                <p>Unreal / Blender / Photoshop</p>
+                <a href="#" class="btn gallery-trigger">View Project</a>
             </div>
         </div>
-        </section>
+    </section>
 
     <footer id="contact">
         <h2>Let's connect.</h2>
@@ -53,10 +84,22 @@
             <a href="#">GitHub</a>
             <a href="#">ArtStation</a>
             <a href="#">LinkedIn</a>
-            <a href="mailto:your@email.com">Email</a>
         </div>
-        <p>&copy; 2026 [Your Name]</p>
+        <p>&copy; 2026 Jan Alexander</p>
     </footer>
+
+    <div id="portfolio-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            <img id="modal-img" src="" alt="Gallery Image">
+            <div class="modal-controls">
+                <button id="prev-btn">&larr; Prev</button>
+                <button id="next-btn">Next &rarr;</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 
 </body>
 </html>
