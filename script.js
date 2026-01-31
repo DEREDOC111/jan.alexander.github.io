@@ -1,6 +1,7 @@
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('nav-links');
 
+// Mobile Menu Toggle
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navLinks.classList.toggle('active');
@@ -22,29 +23,19 @@ const artworkImages = [
 const modal = document.getElementById('portfolio-modal');
 const track = document.getElementById('carousel-track');
 const dotsContainer = document.getElementById('carousel-dots');
-const closeBtn = document.querySelector('.close-modal');
 let currentIndex = 0;
 
 function initCarousel() {
     track.innerHTML = artworkImages.map(src => `
-        <div class="image-slide">
-            <div class="image-container">
-                <img src="${src}" alt="Artwork">
-            </div>
-        </div>
+        <div class="image-slide"><img src="${src}" alt="Art"></div>
     `).join('');
-    
     dotsContainer.innerHTML = artworkImages.map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}"></div>`).join('');
 }
 
 function updateCarousel() {
-    const viewport = modal.querySelector('.carousel-viewport');
-    const width = viewport.clientWidth;
+    const width = modal.querySelector('.carousel-viewport').clientWidth;
     track.style.transform = `translateX(-${currentIndex * width}px)`;
-    
-    document.querySelectorAll('.dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentIndex);
-    });
+    document.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
 }
 
 document.querySelectorAll('.gallery-trigger').forEach(btn => {
@@ -52,6 +43,7 @@ document.querySelectorAll('.gallery-trigger').forEach(btn => {
         e.preventDefault();
         initCarousel();
         modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Lock Scroll
         currentIndex = 0;
         setTimeout(updateCarousel, 100);
     });
@@ -67,17 +59,18 @@ document.getElementById('prev-btn').onclick = () => {
     updateCarousel();
 };
 
-function closeModal() {
+const closeModal = () => {
     modal.style.display = 'none';
-}
-
-closeBtn.onclick = closeModal;
-
-window.onclick = (e) => {
-    if (e.target === modal) closeModal();
+    document.body.style.overflow = 'auto'; // Unlock Scroll
 };
 
-window.onresize = () => {
-    if (modal.style.display === 'flex') updateCarousel();
-};
+document.querySelector('.close-modal').onclick = closeModal;
+window.onclick = (e) => { if (e.target === modal) closeModal(); };
+window.addEventListener('resize', () => { if (modal.style.display === 'flex') updateCarousel(); });
 
+/* --- PREVENT PINCH ZOOM & HORIZONTAL SWIPE --- */
+document.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 1) e.preventDefault();
+}, { passive: false });
+
+document.addEventListener('gesturestart', (e) => e.preventDefault());
