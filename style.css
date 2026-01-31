@@ -12,7 +12,7 @@ body {
     font-family: 'Inter', sans-serif;
     color: var(--text-color);
     line-height: 1.6;
-    background-color: transparent;
+    background-color: var(--bg-color);
 }
 
 /* --- Background Animation --- */
@@ -20,58 +20,81 @@ body {
 body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; z-index: -1; }
 @keyframes moveBlob { 0% { transform: translate(-70%, -30%) scale(1); } 50% { transform: translate(10%, -10%) scale(1.1); } 100% { transform: translate(-20%, 30%) scale(0.9); } }
 
-/* --- Navigation & Hamburger Fix --- */
+/* --- Navigation --- */
 header { position: sticky; top: 0; width: 100%; z-index: 1000; background-color: rgba(15, 15, 15, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
 nav { display: flex; justify-content: space-between; padding: 1.2rem 10%; align-items: center; }
 .logo { width: 45px; }
 .logo img { width: 100%; }
-
 nav ul { display: flex; list-style: none; }
 nav ul li { margin-left: 2rem; }
 nav a { text-decoration: none; color: rgba(255, 255, 255, 0.8); transition: 0.3s; }
 nav a:hover { color: var(--accent-color); }
 
-.hamburger { 
-    display: none; 
-    flex-direction: column; 
-    gap: 6px; 
-    cursor: pointer; 
-    z-index: 2100; /* Higher than the sidebar */
-    padding: 10px;
-}
-.hamburger span { 
-    width: 28px; 
-    height: 3px; 
-    background: #fff; 
-    transition: all 0.3s ease-in-out; 
-    border-radius: 10px;
-}
-
-/* Hamburger to X Animation */
-.hamburger.active { position: fixed; right: 10%; top: 20px; }
+/* --- Hamburger --- */
+.hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 2100; padding: 10px; }
+.hamburger span { width: 28px; height: 3px; background: #fff; transition: all 0.3s ease-in-out; border-radius: 10px; }
 .hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
 .hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(-20px); }
 .hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
-/* --- Portfolio Grid --- */
-.hero { padding: 100px 10% 40px; position: relative; z-index: 1; }
-.hero h1 { font-size: 3.5rem; }
+/* --- Hero --- */
+.hero { padding: 120px 10% 60px; position: relative; z-index: 1; }
+.hero h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 10px; }
+.hero-desc { font-size: 1.2rem; max-width: 600px; color: rgba(255,255,255,0.8); margin-bottom: 20px; }
 .highlight { color: var(--accent-color); }
+.hero-tags { font-size: 1rem; color: var(--accent-color); font-weight: bold; letter-spacing: 1px; }
+
+/* --- Portfolio Grid --- */
 .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; padding: 2rem 10%; position: relative; z-index: 1; }
 .project-card { background: var(--card-bg); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; overflow: hidden; transition: 0.4s; backdrop-filter: blur(5px); }
 .project-card:hover { transform: translateY(-10px); border-color: var(--accent-color); }
 .project-image { height: 250px; background-size: cover; background-position: center; }
 .project-info { padding: 1.5rem; }
-.btn { display: inline-block; margin-top: 1rem; padding: 0.6rem 1.2rem; border: 1px solid var(--accent-color); color: var(--accent-color); text-decoration: none; border-radius: 6px; transition: 0.3s; }
+.btn { display: inline-block; margin-top: 1rem; padding: 0.6rem 1.2rem; border: 1px solid var(--accent-color); color: var(--accent-color); text-decoration: none; border-radius: 6px; transition: 0.3s; cursor: pointer; }
+.btn:hover { background: var(--accent-color); color: #000; }
 
-/* --- MODAL & CAROUSEL --- */
+/* --- ABOUT SECTION & TECH ICONS --- */
+.about-section { padding: 100px 10%; position: relative; z-index: 1; }
+.about-glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 60px; max-width: 1000px; margin: 0 auto; }
+.about-text h2 { font-size: 2.5rem; margin-bottom: 20px; }
+.about-text p { font-size: 1.1rem; color: rgba(255,255,255,0.8); margin-bottom: 40px; }
+
+.tech-categories { display: flex; flex-wrap: wrap; gap: 40px; }
+.tech-group { flex: 1; min-width: 200px; }
+.tech-group h4 { font-size: 0.8rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; border-left: 2px solid var(--accent-color); padding-left: 12px; }
+.tech-icons { display: flex; gap: 25px; flex-wrap: wrap; }
+.tech-item { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 60px; }
+
+/* Fix Visibility: No grayscale, full opacity, and a glow for dark icons */
+.tech-item img { 
+    width: 45px; 
+    height: 45px; 
+    object-fit: contain; 
+    transition: 0.3s ease;
+    /* This drop-shadow acts like a backlight for dark logos like PS and Ai */
+    filter: none;
+}
+
+.tech-item span { font-size: 0.75rem; color: rgba(255, 255, 255, 0.6); transition: 0.3s; white-space: nowrap; }
+.tech-item:hover img { transform: translateY(-5px) scale(1.1); filter: drop-shadow(0 0 12px var(--accent-color)); }
+.tech-item:hover span { color: var(--accent-color); opacity: 1; }
+
+/* --- FOOTER --- */
+footer { padding: 100px 10% 60px; text-align: center; position: relative; z-index: 1; width: 100%; }
+.footer-content { max-width: 600px; margin: 0 auto; }
+footer h2 { font-size: 2.5rem; margin-bottom: 30px; }
+.social-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 40px; }
+.social-links a { color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: 0.3s; font-weight: bold; }
+.social-links a:hover { color: var(--accent-color); }
+.copyright { font-size: 0.9rem; opacity: 0.4; }
+
+/* --- MODAL --- */
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); z-index: 3000; justify-content: center; align-items: center; padding: 15px; }
 .modal-glass-card { position: relative; width: 100%; max-width: 900px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(25px) saturate(160%); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; padding: 50px 10px 20px; display: flex; flex-direction: column; align-items: center; }
 .carousel-viewport { width: 100%; overflow: hidden; display: flex; justify-content: center; }
 .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
 .image-slide { width: 100%; flex-shrink: 0; display: flex; justify-content: center; align-items: center; }
-.image-container { display: flex; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-.image-container img { max-height: 65vh; max-width: 90vw; object-fit: contain; display: block; border-radius: 20px; clip-path: inset(0 round 20px); }
+.image-container img { max-height: 65vh; max-width: 90vw; object-fit: contain; border-radius: 20px; }
 .modal-controls { margin-top: 20px; display: flex; align-items: center; gap: 15px; }
 .modal-controls button { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; cursor: pointer; }
 .carousel-dots { display: flex; gap: 8px; }
@@ -79,18 +102,13 @@ nav a:hover { color: var(--accent-color); }
 .dot.active { background: var(--accent-color); transform: scale(1.2); }
 .close-modal { position: absolute; top: 10px; right: 20px; font-size: 2.5rem; color: #fff; cursor: pointer; z-index: 3010; }
 
-/* --- MOBILE VIEW --- */
+/* --- MOBILE --- */
 @media (max-width: 768px) {
     .hamburger { display: flex; }
-    nav ul {
-        position: fixed; right: -100%; top: 0; height: 100vh; width: 100%; /* Full screen for better UX */
-        background: rgba(10, 10, 10, 0.98); flex-direction: column; 
-        align-items: center; justify-content: center; transition: 0.4s ease-in-out;
-        z-index: 2000;
-    }
+    nav ul { position: fixed; right: -100%; top: 0; height: 100vh; width: 100%; background: rgba(10, 10, 10, 0.98); flex-direction: column; align-items: center; justify-content: center; transition: 0.4s ease-in-out; z-index: 2000; }
     nav ul.active { right: 0; }
     nav ul li { margin: 1.5rem 0; font-size: 1.5rem; }
-    .hero h1 { font-size: 2.2rem; }
+    .hero h1 { font-size: 2.5rem; }
+    .about-glass-card { padding: 40px 20px; }
+    .tech-categories { flex-direction: column; gap: 30px; }
 }
-
-footer { padding: 60px 10%; text-align: center; }

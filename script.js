@@ -1,14 +1,11 @@
-// --- MOBILE NAV TOGGLE ---
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('nav-links');
 
 hamburger.addEventListener('click', () => {
-    // This toggles the animation on the hamburger and shows/hides the menu
     hamburger.classList.toggle('active');
     navLinks.classList.toggle('active');
 });
 
-// Auto-close menu when a link is clicked
 document.querySelectorAll('#nav-links a').forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
@@ -16,7 +13,6 @@ document.querySelectorAll('#nav-links a').forEach(link => {
     });
 });
 
-// --- CAROUSEL GALLERY LOGIC ---
 const artworkImages = [
     "https://github.com/DEREDOC111/jan.alexander.github.io/blob/main/Art1.webp?raw=true",
     "https://github.com/DEREDOC111/jan.alexander.github.io/blob/main/Art2.webp?raw=true",
@@ -84,3 +80,4 @@ window.onclick = (e) => {
 window.onresize = () => {
     if (modal.style.display === 'flex') updateCarousel();
 };
+
