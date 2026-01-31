@@ -20,23 +20,38 @@ body {
 body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; z-index: -1; }
 @keyframes moveBlob { 0% { transform: translate(-70%, -30%) scale(1); } 50% { transform: translate(10%, -10%) scale(1.1); } 100% { transform: translate(-20%, 30%) scale(0.9); } }
 
-/* --- Navigation & Hamburger Animation --- */
+/* --- Navigation & Hamburger Fix --- */
 header { position: sticky; top: 0; width: 100%; z-index: 1000; background-color: rgba(15, 15, 15, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
 nav { display: flex; justify-content: space-between; padding: 1.2rem 10%; align-items: center; }
 .logo { width: 45px; }
 .logo img { width: 100%; }
+
 nav ul { display: flex; list-style: none; }
 nav ul li { margin-left: 2rem; }
 nav a { text-decoration: none; color: rgba(255, 255, 255, 0.8); transition: 0.3s; }
 nav a:hover { color: var(--accent-color); }
 
-.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; position: relative; z-index: 1100; }
-.hamburger span { width: 25px; height: 3px; background: #fff; transition: 0.3s; transform-origin: left; }
+.hamburger { 
+    display: none; 
+    flex-direction: column; 
+    gap: 6px; 
+    cursor: pointer; 
+    z-index: 2100; /* Higher than the sidebar */
+    padding: 10px;
+}
+.hamburger span { 
+    width: 28px; 
+    height: 3px; 
+    background: #fff; 
+    transition: all 0.3s ease-in-out; 
+    border-radius: 10px;
+}
 
 /* Hamburger to X Animation */
-.hamburger.active span:nth-child(1) { transform: rotate(45deg); }
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: rotate(-45deg); }
+.hamburger.active { position: fixed; right: 10%; top: 20px; }
+.hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; transform: translateX(-20px); }
+.hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
 /* --- Portfolio Grid --- */
 .hero { padding: 100px 10% 40px; position: relative; z-index: 1; }
@@ -49,39 +64,33 @@ nav a:hover { color: var(--accent-color); }
 .project-info { padding: 1.5rem; }
 .btn { display: inline-block; margin-top: 1rem; padding: 0.6rem 1.2rem; border: 1px solid var(--accent-color); color: var(--accent-color); text-decoration: none; border-radius: 6px; transition: 0.3s; }
 
-/* --- THE MODAL & CAROUSEL --- */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); z-index: 2000; justify-content: center; align-items: center; padding: 10px; }
+/* --- MODAL & CAROUSEL --- */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); z-index: 3000; justify-content: center; align-items: center; padding: 15px; }
 .modal-glass-card { position: relative; width: 100%; max-width: 900px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(25px) saturate(160%); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; padding: 50px 10px 20px; display: flex; flex-direction: column; align-items: center; }
-
 .carousel-viewport { width: 100%; overflow: hidden; display: flex; justify-content: center; }
 .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
-
 .image-slide { width: 100%; flex-shrink: 0; display: flex; justify-content: center; align-items: center; }
-.image-container { display: flex; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); background: transparent; }
-.image-container img { max-height: 65vh; max-width: 90vw; object-fit: contain; display: block; }
-
+.image-container { display: flex; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.image-container img { max-height: 65vh; max-width: 90vw; object-fit: contain; display: block; border-radius: 20px; clip-path: inset(0 round 20px); }
 .modal-controls { margin-top: 20px; display: flex; align-items: center; gap: 15px; }
-.modal-controls button { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; }
+.modal-controls button { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); color: var(--accent-color); padding: 8px 16px; border-radius: 20px; cursor: pointer; }
 .carousel-dots { display: flex; gap: 8px; }
 .dot { width: 8px; height: 8px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; }
 .dot.active { background: var(--accent-color); transform: scale(1.2); }
+.close-modal { position: absolute; top: 10px; right: 20px; font-size: 2.5rem; color: #fff; cursor: pointer; z-index: 3010; }
 
-.close-modal { position: absolute; top: 10px; right: 20px; font-size: 2.5rem; color: #fff; cursor: pointer; z-index: 2010; }
-
-/* --- MOBILE SPECIFIC FIXES --- */
+/* --- MOBILE VIEW --- */
 @media (max-width: 768px) {
     .hamburger { display: flex; }
     nav ul {
-        position: fixed; right: -100%; top: 0; height: 100vh; width: 80%;
+        position: fixed; right: -100%; top: 0; height: 100vh; width: 100%; /* Full screen for better UX */
         background: rgba(10, 10, 10, 0.98); flex-direction: column; 
-        align-items: center; justify-content: center; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+        align-items: center; justify-content: center; transition: 0.4s ease-in-out;
+        z-index: 2000;
     }
     nav ul.active { right: 0; }
-    nav ul li { margin: 1.5rem 0; }
-    
-    .hero h1 { font-size: 2.5rem; }
-    .modal-glass-card { padding-top: 60px; }
+    nav ul li { margin: 1.5rem 0; font-size: 1.5rem; }
+    .hero h1 { font-size: 2.2rem; }
 }
 
 footer { padding: 60px 10%; text-align: center; }
