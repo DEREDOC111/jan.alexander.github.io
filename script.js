@@ -3,11 +3,12 @@ const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('nav-links');
 
 hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active'); // Animates the hamburger to X
-    navLinks.classList.toggle('active');  // Opens the sidebar
+    // This toggles the animation on the hamburger and shows/hides the menu
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
 });
 
-// Close menu when clicking a link (optional but recommended for UX)
+// Auto-close menu when a link is clicked
 document.querySelectorAll('#nav-links a').forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
@@ -32,7 +33,7 @@ function initCarousel() {
     track.innerHTML = artworkImages.map(src => `
         <div class="image-slide">
             <div class="image-container">
-                <img src="${src}" alt="Artwork" loading="lazy">
+                <img src="${src}" alt="Artwork">
             </div>
         </div>
     `).join('');
@@ -41,7 +42,8 @@ function initCarousel() {
 }
 
 function updateCarousel() {
-    const width = modal.querySelector('.carousel-viewport').clientWidth;
+    const viewport = modal.querySelector('.carousel-viewport');
+    const width = viewport.clientWidth;
     track.style.transform = `translateX(-${currentIndex * width}px)`;
     
     document.querySelectorAll('.dot').forEach((dot, i) => {
@@ -55,7 +57,6 @@ document.querySelectorAll('.gallery-trigger').forEach(btn => {
         initCarousel();
         modal.style.display = 'flex';
         currentIndex = 0;
-        // Small timeout ensures the DOM has rendered before we calculate width
         setTimeout(updateCarousel, 100);
     });
 });
@@ -72,7 +73,6 @@ document.getElementById('prev-btn').onclick = () => {
 
 function closeModal() {
     modal.style.display = 'none';
-    track.innerHTML = ''; 
 }
 
 closeBtn.onclick = closeModal;
