@@ -73,7 +73,7 @@
             <div class="project-info">
                 <h3>Project D</h3>
                 <p>Unreal / Blender / Photoshop</p>
-                <a href="#" class="btn gallery-trigger">View Project</a>
+                <a href="#" class="btn gallery-trigger">View Gallery</a>
             </div>
         </div>
     </section>
@@ -89,11 +89,15 @@
     </footer>
 
     <div id="portfolio-modal" class="modal">
-        <span class="close-modal">&times;</span>
-        <div class="modal-content">
-            <img id="modal-img" src="" alt="Gallery Image">
+        <div class="modal-glass-card">
+            <span class="close-modal">&times;</span>
+            <div class="carousel-viewport">
+                <div class="carousel-track" id="carousel-track">
+                    </div>
+            </div>
             <div class="modal-controls">
                 <button id="prev-btn">&larr; Prev</button>
+                <div class="carousel-dots" id="carousel-dots"></div>
                 <button id="next-btn">Next &rarr;</button>
             </div>
         </div>
