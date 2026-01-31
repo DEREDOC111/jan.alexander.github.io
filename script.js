@@ -1,16 +1,20 @@
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('nav-links');
 
-// Mobile Menu Toggle
+// Toggle Mobile Menu
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navLinks.classList.toggle('active');
+    // Lock background scroll when menu is open
+    document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
 });
 
+// Close menu on link click
 document.querySelectorAll('#nav-links a').forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         navLinks.classList.remove('active');
+        document.body.style.overflow = 'auto';
     });
 });
 
@@ -35,7 +39,6 @@ function initCarousel() {
 function updateCarousel() {
     const width = modal.querySelector('.carousel-viewport').clientWidth;
     track.style.transform = `translateX(-${currentIndex * width}px)`;
-    document.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
 }
 
 document.querySelectorAll('.gallery-trigger').forEach(btn => {
@@ -43,7 +46,7 @@ document.querySelectorAll('.gallery-trigger').forEach(btn => {
         e.preventDefault();
         initCarousel();
         modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Lock Scroll
+        document.body.style.overflow = 'hidden';
         currentIndex = 0;
         setTimeout(updateCarousel, 100);
     });
@@ -61,14 +64,13 @@ document.getElementById('prev-btn').onclick = () => {
 
 const closeModal = () => {
     modal.style.display = 'none';
-    document.body.style.overflow = 'auto'; // Unlock Scroll
+    document.body.style.overflow = 'auto';
 };
 
 document.querySelector('.close-modal').onclick = closeModal;
 window.onclick = (e) => { if (e.target === modal) closeModal(); };
-window.addEventListener('resize', () => { if (modal.style.display === 'flex') updateCarousel(); });
 
-/* --- PREVENT PINCH ZOOM & HORIZONTAL SWIPE --- */
+/* --- FINAL MOBILE GESTURE PROTECTION --- */
 document.addEventListener('touchstart', (e) => {
     if (e.touches.length > 1) e.preventDefault();
 }, { passive: false });
