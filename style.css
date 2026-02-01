@@ -5,12 +5,13 @@
     --card-bg: rgba(26, 26, 26, 0.7);
 }
 
-/* 1. LOCK HORIZONTAL SCROLL */
+/* 1. LOCK HORIZONTAL SCROLL - FIXED */
 html, body { 
     background-color: var(--bg-color); 
     scroll-behavior: smooth; 
-    max-width: 100%;
-    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden; /* This kills the horizontal swipe */
     position: relative;
     margin: 0;
     padding: 0;
@@ -22,27 +23,35 @@ body {
     font-family: 'Inter', sans-serif;
     color: var(--text-color);
     line-height: 1.6;
-    background-color: var(--bg-color);
 }
 
-/* 2. RESTORE GRID & ANIMATION */
+/* 2. RESTORE GRID & BLOB - FIXED */
 .bg-blur { 
     position: fixed; 
-    top: 50%; 
-    left: 50%; 
-    width: 600px; 
-    height: 600px; 
-    background-color: var(--accent-color); 
-    filter: blur(140px); 
-    opacity: 0.15; 
+    top: 0; 
+    left: 0; 
+    width: 100vw; 
+    height: 100vh; 
     z-index: -2; 
-    border-radius: 50%; 
     pointer-events: none; 
-    transform: translate(-50%, -50%);
-    animation: moveBlob 20s infinite alternate ease-in-out; 
 }
 
-/* The Grid Background */
+/* The actual moving circle */
+.bg-blur::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    background-color: var(--accent-color);
+    filter: blur(120px);
+    opacity: 0.2; /* Higher visibility */
+    border-radius: 50%;
+    animation: moveBlob 15s infinite alternate ease-in-out;
+}
+
+/* The Grid Overlay - Fixed Visibility */
 body::before { 
     content: ""; 
     position: fixed; 
@@ -51,17 +60,17 @@ body::before {
     width: 100%; 
     height: 100%; 
     background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), 
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); 
-    background-size: 50px 50px; 
+        linear-gradient(rgba(0, 255, 204, 0.05) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(0, 255, 204, 0.05) 1px, transparent 1px); 
+    background-size: 40px 40px; 
     pointer-events: none; 
     z-index: -1; 
 }
 
 @keyframes moveBlob { 
-    0% { transform: translate(-70%, -30%) scale(1); } 
-    50% { transform: translate(10%, -10%) scale(1.1); } 
-    100% { transform: translate(-20%, 30%) scale(0.9); } 
+    0% { transform: translate(-80%, -40%) scale(1); } 
+    50% { transform: translate(20%, -10%) scale(1.2); } 
+    100% { transform: translate(-30%, 40%) scale(0.8); } 
 }
 
 /* --- Navigation --- */
@@ -135,28 +144,30 @@ footer h2 { font-size: 2.5rem; margin-bottom: 30px; }
 .dot.active { background: var(--accent-color); transform: scale(1.2); }
 .close-modal { position: absolute; top: 10px; right: 20px; font-size: 2.5rem; color: #fff; cursor: pointer; z-index: 3010; }
 
-/* --- MOBILE --- */
+/* --- MOBILE - FIXED SWIPE --- */
 @media (max-width: 768px) {
     .hamburger { display: flex; }
     
-    /* 3. ENSURE MENU DOESN'T EXPAND BODY WIDTH */
     nav ul { 
         position: fixed; 
-        right: -100%; 
+        right: 0; /* Align it to the screen */
         top: 0; 
         height: 100vh; 
-        width: 100%; 
+        width: 100vw; 
         background: rgba(10, 10, 10, 0.98); 
         flex-direction: column; 
         align-items: center; 
         justify-content: center; 
-        transition: 0.4s ease-in-out; 
         z-index: 2000; 
-        visibility: hidden; /* Menu doesn't "exist" for width until active */
+        
+        /* THE FIX: Use opacity/visibility instead of horizontal offset */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s;
     }
     
     nav ul.active { 
-        right: 0; 
+        opacity: 1;
         visibility: visible;
     }
     
