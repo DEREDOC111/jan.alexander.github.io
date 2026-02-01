@@ -114,18 +114,28 @@ nav a:hover { color: var(--accent-color); }
 .modal-glass-card { position: relative; width: 100%; max-width: 900px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; padding: 60px 0 30px; display: flex; flex-direction: column; align-items: center; overflow: hidden; }
 .carousel-viewport { width: 100%; overflow: hidden; }
 .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
-.image-slide { width: 100%; flex-shrink: 0; display: flex; justify-content: center; align-items: center; }
 
-/* FIXED: 80% WIDTH SCALING */
+/* FIXED: ALIGNMENT LOCK */
+.image-slide { 
+    width: 100%; 
+    flex-shrink: 0; 
+    display: flex; 
+    justify-content: center; /* Horizontally center content */
+    align-items: center;     /* Vertically center content */
+    text-align: center;
+}
+
+/* FIXED: 80% WIDTH AND CENTERING */
 .image-slide img { 
     width: 80% !important;   
+    max-width: 80% !important;
     height: auto !important;            
     max-height: 60vh;      
     object-fit: contain;   
     border-radius: 12px; 
     box-shadow: 0 20px 40px rgba(0,0,0,0.6); 
     display: block;
-    margin: 0 auto;
+    margin: 0 auto !important; /* Forces centering in non-flex environments */
 }
 
 .modal-controls { margin-top: 30px; display: flex; align-items: center; gap: 15px; z-index: 3020; }
@@ -168,9 +178,10 @@ nav a:hover { color: var(--accent-color); }
     .about-glass-card { padding: 40px 20px; }
     .tech-categories { flex-direction: column; gap: 30px; }
 
-    /* Extra padding for image on small phones */
+    /* Centering fix for mobile */
     .image-slide img {
-        width: 85% !important;
+        width: 80% !important;
         max-height: 50vh;
+        margin: 0 auto !important;
     }
 }
