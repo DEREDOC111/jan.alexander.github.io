@@ -127,7 +127,7 @@ footer h2 { font-size: 2.5rem; margin-bottom: 30px; }
 
 /* FIXED THIS LINE: Correctly targets the image inside the slide to 90% */
 .image-slide img { 
-    width: 90% !important; 
+    width: 85% !important; 
     max-height: 65vh; 
     object-fit: contain; 
     border-radius: 20px; 
