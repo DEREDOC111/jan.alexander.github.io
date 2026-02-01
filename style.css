@@ -5,26 +5,24 @@
     --card-bg: rgba(26, 26, 26, 0.7);
 }
 
-/* 1. LAYOUT & SCROLL LOCK */
+/* 1. LAYOUT RESET & SCROLL LOCK */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
 html { 
     background-color: var(--bg-color); 
-    overflow-x: hidden;
+    overflow-x: hidden; 
 }
 
 body { 
     font-family: 'Inter', sans-serif;
     color: var(--text-color);
     line-height: 1.6;
-    margin: 0;
-    padding: 0;
     width: 100%;
     max-width: 100vw;
     overflow-x: hidden;
     position: relative;
-    background-color: transparent; /* Allows grid/blob to show through */
+    background-color: transparent; 
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* 2. BACKGROUND GRID & BLOB */
 .bg-blur { 
@@ -54,49 +52,44 @@ body {
     100% { transform: translate(-20%, 30%) scale(0.9); } 
 }
 
-/* --- NAVIGATION --- */
+/* 3. NAVIGATION */
 header { position: sticky; top: 0; width: 100%; z-index: 1000; background-color: rgba(15, 15, 15, 0.75); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
 nav { display: flex; justify-content: space-between; padding: 1.2rem 10%; align-items: center; }
 .logo { width: 45px; }
-.logo img { width: 100%; }
 nav ul { display: flex; list-style: none; }
 nav ul li { margin-left: 2rem; }
 nav a { text-decoration: none; color: rgba(255, 255, 255, 0.8); transition: 0.3s; }
-nav a:hover { color: var(--accent-color); }
 
-/* --- HAMBURGER --- */
-.hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 2100; padding: 10px; }
+/* 4. HAMBURGER */
+.hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 2100; }
 .hamburger span { width: 28px; height: 3px; background: #fff; transition: 0.3s; border-radius: 10px; }
-.hamburger.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
-/* --- SECTIONS --- */
+/* 5. SECTIONS */
 .hero { padding: 120px 10% 60px; position: relative; z-index: 1; }
-.hero h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 10px; }
+.hero h1 { font-size: 3.5rem; margin-bottom: 10px; }
 .highlight { color: var(--accent-color); }
 
 .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; padding: 2rem 10%; position: relative; z-index: 1; }
-.project-card { background: var(--card-bg); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; overflow: hidden; transition: 0.4s; backdrop-filter: blur(5px); }
+.project-card { background: var(--card-bg); border-radius: 16px; overflow: hidden; backdrop-filter: blur(5px); }
 .project-image { height: 250px; background-size: cover; background-position: center; }
 .project-info { padding: 1.5rem; }
-.btn { display: inline-block; margin-top: 1rem; padding: 0.6rem 1.2rem; border: 1px solid var(--accent-color); color: var(--accent-color); text-decoration: none; border-radius: 6px; transition: 0.3s; }
+.btn { display: inline-block; margin-top: 1rem; padding: 0.6rem 1.2rem; border: 1px solid var(--accent-color); color: var(--accent-color); text-decoration: none; border-radius: 6px; }
 
-/* --- FOOTER (STABILIZED) --- */
+/* 6. FOOTER FIX (STABLE) */
 footer { 
+    width: 100%;
     padding: 100px 10% 60px; 
     text-align: center; 
     position: relative; 
     z-index: 1; 
-    width: 100%; 
-    box-sizing: border-box;
+    display: block;
+    clear: both;
 }
 .footer-content { max-width: 600px; margin: 0 auto; }
-.social-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 40px; }
-.social-links a { color: rgba(255, 255, 255, 0.6); text-decoration: none; transition: 0.3s; font-weight: bold; }
-.social-links a:hover { color: var(--accent-color); }
+.social-links { display: flex; justify-content: center; gap: 30px; margin: 30px 0; }
+.social-links a { color: rgba(255, 255, 255, 0.6); text-decoration: none; }
 
-/* --- MODAL & GALLERY (FIXED CENTERING) --- */
+/* 7. MODAL & CENTERED ARTWORK */
 .modal { 
     display: none; 
     position: fixed; 
@@ -104,23 +97,19 @@ footer {
     width: 100%; height: 100%; 
     background-color: rgba(0, 0, 0, 0.95); 
     backdrop-filter: blur(10px);
-    z-index: 3000; 
+    z-index: 9999; /* Higher than everything else */
     justify-content: center; 
     align-items: center; 
 }
 
 .modal-glass-card { 
     position: relative; 
-    width: 90%; 
-    max-width: 900px; 
-    background: rgba(255, 255, 255, 0.03); 
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 30px; 
-    padding: 60px 0 30px; 
+    width: 100%; 
+    height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    overflow: hidden; 
+    justify-content: center; /* Vertical center */
+    align-items: center;     /* Horizontal center */
 }
 
 .carousel-viewport { 
@@ -130,45 +119,51 @@ footer {
 
 .carousel-track { 
     display: flex; 
-    transition: transform 0.6s ease-in-out; 
-    width: 100%;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
 }
 
+/* THIS SECTION FIXES LEFT ALIGNMENT */
 .image-slide { 
     min-width: 100%; 
     flex-shrink: 0;
     display: flex; 
-    justify-content: center; /* THE HORIZONTAL CENTERING FIX */
-    align-items: center;     /* THE VERTICAL CENTERING FIX */
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px;
 }
 
 .image-slide img { 
-    width: 80% !important; /* Your requested size */
-    max-height: 60vh; 
+    width: 80% !important; /* Scale reduction */
+    max-width: 80% !important;
+    max-height: 70vh; 
     object-fit: contain; 
     border-radius: 12px; 
-    box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
     display: block;
+    margin: 0 auto;
 }
 
-.modal-controls { margin-top: 25px; display: flex; gap: 15px; align-items: center; }
-.modal-controls button { background: rgba(255,255,255,0.1); color: var(--accent-color); border: 1px solid var(--accent-color); padding: 8px 16px; border-radius: 20px; cursor: pointer; transition: 0.3s; }
-.modal-controls button:hover { background: var(--accent-color); color: #000; }
-.close-modal { position: absolute; top: 20px; right: 25px; font-size: 2.5rem; color: #fff; cursor: pointer; line-height: 1; }
+.modal-controls { margin-top: 30px; display: flex; gap: 20px; align-items: center; }
+.modal-controls button { background: none; border: 1px solid var(--accent-color); color: var(--accent-color); padding: 10px 20px; border-radius: 30px; cursor: pointer; }
+.close-modal { position: absolute; top: 40px; right: 40px; font-size: 3rem; color: #fff; cursor: pointer; z-index: 10000; }
 
-/* --- MOBILE VIEW --- */
+/* 8. MOBILE VIEW */
 @media (max-width: 768px) {
     .hamburger { display: flex; }
     nav ul { 
         position: fixed; right: 0; top: 0; height: 100vh; width: 100%; 
-        background: rgba(10, 10, 10, 0.98); flex-direction: column; 
+        background: #000; flex-direction: column; 
         align-items: center; justify-content: center; 
-        opacity: 0; visibility: hidden; pointer-events: none; transition: 0.4s;
+        opacity: 0; visibility: hidden; transition: 0.4s;
     }
-    nav ul.active { opacity: 1; visibility: visible; pointer-events: all; }
+    nav ul.active { opacity: 1; visibility: visible; }
     
+    .hero h1 { font-size: 2.5rem; }
+    
+    /* Center the artwork specifically for mobile view */
     .image-slide img { 
-        width: 85% !important; 
+        width: 90% !important; 
+        max-width: 90% !important;
         max-height: 50vh; 
     }
 }
