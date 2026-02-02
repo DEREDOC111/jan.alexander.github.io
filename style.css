@@ -118,21 +118,20 @@ footer h2 { font-size: 2.5rem; margin-bottom: 30px; }
 .social-links a:hover { color: var(--accent-color); }
 .copyright { font-size: 0.9rem; opacity: 0.4; }
 
-/* --- Modal (Targeted Fix for 90% Size and Centering) --- */
+/* --- Modal --- */
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); z-index: 3000; justify-content: center; align-items: center; padding: 15px; }
 .modal-glass-card { position: relative; width: 100%; max-width: 900px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(25px) saturate(160%); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 30px; padding: 50px 10px 20px; display: flex; flex-direction: column; align-items: center; }
 .carousel-viewport { width: 100%; overflow: hidden; display: flex; justify-content: center; }
 .carousel-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); width: 100%; }
 .image-slide { width: 100%; flex-shrink: 0; display: flex; justify-content: center; align-items: center; }
 
-/* FIXED THIS LINE: Correctly targets the image inside the slide to 90% */
+/* Scale images to 100% of their container, which we control in the project logic */
 .image-slide img { 
     width: 100% !important; 
     max-height: 65vh; 
     object-fit: contain; 
     border-radius: 20px; 
     margin: 0 auto;
-    
 }
 
 .modal-controls { margin-top: 20px; display: flex; align-items: center; gap: 15px; }
@@ -156,4 +155,54 @@ footer h2 { font-size: 2.5rem; margin-bottom: 30px; }
     .hero h1 { font-size: 2.5rem; }
     .about-glass-card { padding: 40px 20px; }
     .tech-categories { flex-direction: column; gap: 30px; }
+}
+
+/* =========================================
+   NEW PROJECT PAGE STYLES (ADDED BELOW)
+   ========================================= */
+
+.project-gallery {
+    padding: 0 10% 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.gallery-item img {
+    display: block;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+
+/* For the Hero-level Landscape shots at 85% */
+.gallery-item.wide img {
+    width: 85%;
+    margin: 0 auto;
+}
+
+/* For the Portrait pairs at 85% total width */
+.gallery-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 85%;
+    margin: 0 auto;
+}
+
+.gallery-row .gallery-item img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .gallery-item.wide img, .gallery-row {
+        width: 100%;
+    }
+    .gallery-row {
+        grid-template-columns: 1fr;
+    }
 }
