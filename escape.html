@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Escape | Jan Alexander</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="escape-style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -18,46 +19,62 @@
                 <a href="index.html"><img src="https://github.com/DEREDOC111/jan.alexander.github.io/blob/main/Logo.png?raw=true" alt="Logo"></a>
             </div>
             <ul id="nav-links">
-                <li><a href="index.html">← Back to Home</a></li>
+                <li><a href="index.html">← Main</a></li>
             </ul>
         </nav>
     </header>
 
     <main class="hero" style="padding-bottom: 20px;">
         <h1>Escape: <span class="highlight">Unity to UE5</span></h1>
-        <p class="hero-desc">A psychological horror environment study. This project involved migrating a puzzle-based interior from Unity to Unreal Engine 5 to leverage Lumen's real-time GI.</p>
-        <div class="hero-tags"><span>Reconstruction</span> • <span>Horror Design</span> • <span>UE5 Migration</span></div>
+        <p class="hero-desc">
+            A psychological horror environment originally built in <b>Unity</b>, now fully reimagined in <b>Unreal Engine 5</b>. This study explores level design and leverages Lumen's real-time GI.
+        </p>
+        <div class="hero-tags"><span>UE5 Migration</span> • <span>Environment Design</span> • <span>Lumen</span></div>
     </main>
 
     <section class="project-gallery">
-        <div class="gallery-item wide">
-            <img src="escape_main.webp" alt="Escape Environment" loading="lazy">
+        <div class="video-section">
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube.com/watch?v=ozfvDf3AnhM" 
+                    frameborder="0" 
+                    allowfullscreen>
+                </iframe>
+            </div>
         </div>
 
         <div class="gallery-row">
             <div class="gallery-item portrait">
-                <img src="escape_detail_1.webp" alt="Room Detail" loading="lazy">
+                <img src="YOUR_ESCAPE_IMAGE_1.png" alt="Detail 1">
             </div>
             <div class="gallery-item portrait">
-                <img src="escape_detail_2.webp" alt="Lighting Study" loading="lazy">
+                <img src="YOUR_ESCAPE_IMAGE_2.png" alt="Detail 2">
             </div>
+        </div>
+
+        <div class="gallery-item wide">
+            <img src="YOUR_ESCAPE_IMAGE_3.png" alt="Wide Shot">
         </div>
     </section>
 
     <section class="about-section">
         <div class="about-glass-card">
             <div class="about-text">
-                <h2>The <span class="highlight">Migration</span></h2>
-                <p>The core of this project was a technical "re-lighting" exercise. Moving the scene to UE5 allowed for a more oppressive atmosphere, using high-contrast shadows and volumetric lighting to guide the player's eye toward puzzles.</p>
+                <h2>Technical <span class="highlight">Migration</span></h2>
+                <p>Translating this project from Unity to Unreal Engine 5 allowed me to replace baked lighting with dynamic <b>Lumen</b> Global Illumination, significantly increasing the visual tension.</p>
                 
                 <div class="tech-categories">
                     <div class="tech-group">
-                        <h4>Workflow Jump</h4>
-                        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">Successfully translated Unity's lightmaps into Unreal's dynamic <b>Lumen</b> system, significantly improving the visual mood.</p>
+                        <h4>Workflow Evolution</h4>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">
+                            Managed the porting of assets and logic while refining the environmental storytelling to suit UE5's high-fidelity capabilities.
+                        </p>
                     </div>
                     <div class="tech-group">
-                        <h4>Level Design</h4>
-                        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">Focused on claustrophobic set dressing and "quiet" storytelling through environmental details.</p>
+                        <h4>Atmospheric Design</h4>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">
+                           Focused on <b>Volumetric Lighting</b> and tight camera angles to enhance the psychological horror experience.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -66,7 +83,7 @@
 
     <footer>
         <div class="footer-content">
-            <a href="index.html" class="btn">Return to Home</a>
+            <a href="index.html" class="btn">Return to Main Page</a>
             <p class="copyright" style="margin-top: 40px;">&copy; 2026 Jan Alexander</p>
         </div>
     </footer>
