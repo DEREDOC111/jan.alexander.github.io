@@ -10,16 +10,30 @@
 </head>
 <body>
 
+    <div id="loader">
+        <div class="loader-center-shield" id="loader-shield">
+            <div class="loader-content">
+                <img src="https://github.com/DEREDOC111/jan.alexander.github.io/blob/main/Logo.png?raw=true" alt="Logo" class="loader-logo">
+                <div class="loader-bar-container">
+                    <div class="loader-bar" id="loader-bar"></div>
+                </div>
+                <p id="loader-text">SYNCING DIMENSIONS...</p>
+            </div>
+        </div>
+    </div>
+
     <div class="bg-blur"></div>
     <div class="grid-overlay"></div>
 
     <header>
         <nav>
             <div class="logo">
-                <a href="index.html"><img src="https://github.com/DEREDOC111/jan.alexander.github.io/blob/main/Logo.png?raw=true" alt="Logo"></a>
+                <a href="index.html" class="transition-link">
+                    <img src="https://github.com/DEREDOC111/jan.alexander.github.io/blob/main/Logo.png?raw=true" alt="Logo">
+                </a>
             </div>
             <ul id="nav-links">
-                <li><a href="index.html">← Main</a></li>
+                <li><a href="index.html" class="transition-link">← Main</a></li>
             </ul>
         </nav>
     </header>
@@ -86,10 +100,11 @@
 
     <footer>
         <div class="footer-content">
-            <a href="index.html" class="btn">Return to Main Page</a>
+            <a href="index.html" class="btn transition-link">Return to Main Page</a>
             <p class="copyright" style="margin-top: 40px;">&copy; 2026 Jan Alexander</p>
         </div>
     </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
