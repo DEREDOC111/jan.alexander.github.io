@@ -55,7 +55,7 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    opacity: 0.6;
+    opacity: 1.0;
     transition: opacity 0.3s ease;
 }
 
@@ -139,4 +139,5 @@
     color: rgba(255, 255, 255, 0.6);
     line-height: 1.7;
     font-size: 0.95rem;
+
 }
